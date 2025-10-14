@@ -1,9 +1,15 @@
 #include <bits/stdc++.h>
 #include "funcao.cpp"
+#include "funcao.h"
 using namespace std;
+
+int m,n;
+vector<vector<int>>dados;
 int main(){
     int opcao = -1;
-
+    cout << "qual o tamanho da matriz no formato N x M? " << '\n';
+    cin >> n  >> m;
+    dados.assign(n, vector<int>(m, 0));
     while(opcao != 0){
         cout << "1 - criar um conjunto vazio" << '\n';
         cout << "2 - inserir dados no conjunto" << '\n';
@@ -30,8 +36,6 @@ int main(){
             break;
             case 5:
                 interseccao2Conjuntos();
-
-                
             break;
             case 6:
                 mostrarConjunto();
