@@ -30,6 +30,7 @@ int main(){
             break;
             case 5:
                 interseccao2Conjuntos();
+                
             break;
             case 6:
                 mostrarConjunto();
