@@ -5,7 +5,7 @@
 using namespace std;
 
 extern vector<vector<int>> dados; 
-extern int m,n;
+extern int coluna,linha;
 
 void criarConjunto();
 void inserirValor();
