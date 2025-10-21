@@ -4,9 +4,10 @@ using namespace std;
 
 int coluna,linha;
 vector<vector<int>>dados;
+
 int main(){
     int opcao = -1;
-    cout << "qual o tamanho da matriz no formato N x M? " << '\n';
+    cout << "qual o tamanho da matriz no formato M x N? " << '\n';
     cin >> linha  >> coluna;
     //inicializar o tamanho
     dados.assign(linha, vector<int>(coluna, 0));
