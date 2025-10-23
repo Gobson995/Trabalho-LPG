@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 #include "funcao.h"
+
 using namespace std;
 
-int coluna,linha;
+
 vector<vector<int>>dados;
 
 int main(){

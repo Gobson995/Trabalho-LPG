@@ -1,10 +1,9 @@
-#ifndef FUNCAO_H
-#define FUNCAO_H
+#pragma once
 
-#include <bits/stdc++.h>
-using namespace std;
+inline constexpr int M = 8;
+inline constexpr int N = 10;
 
-extern vector<vector<int>> dados; 
+extern vector<vector<int>> dados(M, vector<int> (N,0)); 
 extern int coluna,linha, quantConjuntos;
 
 void criarConjunto();
@@ -16,4 +15,3 @@ void mostrarConjunto();
 void mostrarTodosConjuntos();
 void buscarValor();
 
-#endif
