@@ -16,6 +16,9 @@ O que precisa ser feito:
              - Sair do programa - 9
 - Indexado em 0
 
-Tarefas:
-Gustavo - 
-Matheus - Fazer a main
+O que precisa ser feito:
+- Testar
+- Arrumar "dados"
+- Ver certinho as entradas das funções
+- Arrumar os detalhes de cada opção 
+- Deixar bonitinho as entradas e saídas (Gustavo)
