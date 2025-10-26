@@ -16,8 +16,13 @@ void criarConjunto() {
     }
 }
 
-void inserirValor(){
+void inserirValor() {
     int linha, valor;
+
+    if (quantConjunto == 0) {
+        cout << "Nenhum conjunto foi criado ainda." << endl;
+        return;
+    }
 
     cout << "Em qual conjunto você deseja inserir os dados?" << endl;
     cin >> linha;
@@ -72,6 +77,12 @@ void inserirValor(){
 
 void removerConjunto() {
     int linha;
+
+    if (quantConjunto == 0) {
+        cout << "Nenhum conjunto foi criado ainda." << endl;
+        return;
+    }
+
     cout << "Em qual conjunto você deseja remover?" << endl;
     cin >> linha;
     
@@ -81,135 +92,153 @@ void removerConjunto() {
         cin >> linha;
     }
 
-    for(int i = 0; i < N; i++) {
-        dados[linha][i] = 0;
+    for (int i = linha; i < (quantConjunto - 1); i++) {
+        for (int j = 0; j < N; j++) {
+            dados[i][j] = dados[i+1][j];
+        }
     }
 
-    while (linha < (quantConjunto - 1)) {
-        for (int i = 0; i < N; i++) {
-            dados[linha][i] = dados[linha+1][i];
-            dados[linha+1][i] = 0;
-        }
-        linha++;
+    for (int i = 0; i < N; i++) {
+        dados[quantConjunto - 1][i] = 0;
     }
 
     quantConjunto--;
-    cout << "Conjunto removido com sucesso." << endl;
+    cout << "Conjunto removido." << endl;
 }
 
 void unir2Conjuntos() {
     int linha1, linha2, final = 0, pos = 0;
     map<int,int> freq;
+
+    if (quantConjunto >= M) {
+        cout << "Não há espaço para um novo conjunto" << endl;
+        return;
+    }
+
+    if (quantConjunto < 2) {
+        cout << "Não existe dois conjuntos para fazer a união." << endl;
+        return;
+    }
+
+    cout << "Quais dois conjunto você deseja unir?" << endl;
+    cout << "Primeiro conjunto: ";
+    cin >> linha1;
     
+    while (linha1 < 0 || linha1 >= quantConjunto) {
+        cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
+        cout << "Primeiro conjunto: " << endl;
+        cin >> linha1;
+    }
+
+    cout << endl << "Segundo conjunto: ";
+    cin >> linha2;
+
+    while (linha2 < 0 || linha2 >= quantConjunto) {
+        cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
+        cout << "Segundo conjunto: " << endl;
+        cin >> linha2;
+    }
+    cout << endl;
+
+    for (int i = 0; i < N; i++) {
+        if (dados[linha1][i] != 0) {
+            freq[dados[linha1][i]]++;
+        }
+        if (dados[linha2][i] != 0) {
+            freq[dados[linha2][i]]++;
+        }
+    }
+
     quantConjunto++;
 
-    if (quantConjunto <= M) {
-        cout << "Quais dois conjunto você deseja unir?" << endl;
-        cout << "Primeiro conjunto: ";
-        cin >> linha1;
-        
-        while (linha1 < 0 && linha1 >= quantConjunto) {
-            cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
-            cout << "Primeiro conjunto: " << endl;
-            cin >> linha1;
+    for (auto x : freq) {
+        int valor = x.first;
+        if (pos >= N) {
+            break;
         }
-    
-        cout << endl << "Segundo conjunto: ";
-        cin >> linha2;
-    
-        while (linha2 < 0 && linha2 >= quantConjunto) {
-            cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
-            cout << "Segundo conjunto: " << endl;
-            cin >> linha2;
-        }
-        cout << endl;
-    
-        for (int i = 0; i < N; i++) {
-            if (dados[linha1][i] != 0) {
-                freq[dados[linha1][i]]++;
-            }
-            if (dados[linha2][i] != 0) {
-                freq[dados[linha2][i]]++;
-            }
-        }
-    
-        for (auto x : freq) {
-            int valor = x.first;
-            if ((pos+1) == N) {
-                break;
-            }
-            dados[quantConjunto-1][pos] = valor;
-            pos++;
-        }
-    }
-    else {
-        cout << "Você não pode unir dois conjuntos, pois você não tem espaço para mais um conjuto" << endl;
+        dados[quantConjunto-1][pos] = valor;
+        pos++;
     }
 
+    cout << "União de conjuntos criada." << endl;
 }
+
 void interseccao2Conjuntos(){
     int linha1, linha2, pos = 0;
     map<int,int> freq;
+
+    if (quantConjunto >= M) {
+        cout << "Não há espaço para um novo conjunto" << endl;
+        return;
+    }
+
+    if (quantConjunto < 2) {
+        cout << "Não existe dois conjuntos para fazer a intersecção." << endl;
+        return;
+    }
+
+    cout << "Quais dois conjunto você deseja fazer a intersecção?" << endl;
+    cout << "Primeiro conjunto: ";
+    cin >> linha1;
     
+    while (linha1 < 0 || linha1 >= quantConjunto) {
+        cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
+        cout << "Primeiro conjunto: " << endl;
+        cin >> linha1;
+    }
+
+    cout << endl << "Segundo conjunto: ";
+    cin >> linha2;
+
+    while (linha2 < 0 || linha2 >= quantConjunto) {
+        cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
+        cout << "Segundo conjunto: " << endl;
+        cin >> linha2;
+    }
+    cout << endl;
+
+    for (int i = 0; i < N; i++) {
+        if (dados[linha1][i] != 0) {
+            freq[dados[linha1][i]]++;
+        }
+        if (dados[linha2][i] != 0) {
+            freq[dados[linha2][i]]++;
+        }
+    }
+
     quantConjunto++;
 
-    if (quantConjunto <= M) {
-        cout << "Quais dois conjunto você deseja fazer a intersecção?" << endl;
-        cout << "Primeiro conjunto: ";
-        cin >> linha1;
-        
-        while (linha1 < 0 && linha1 >= quantConjunto) {
-            cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
-            cout << "Primeiro conjunto: " << endl;
-            cin >> linha1;
+    for (auto x : freq) {
+        int valor = x.first;
+        int vezes = x.second;
+        if (vezes == 2) {
+            dados[quantConjunto-1][pos] = valor;
+            pos++;
         }
-    
-        cout << endl << "Segundo conjunto: ";
-        cin >> linha2;
-    
-        while (linha2 < 0 && linha2 >= quantConjunto) {
-            cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
-            cout << "Segundo conjunto: " << endl;
-            cin >> linha2;
-        }
-        cout << endl;
+    }   
 
-        for (int i = 0; i < N; i++) {
-            if (dados[linha1][i] != 0) {
-                freq[dados[linha1][i]]++;
-            }
-            if (dados[linha2][i] != 0) {
-                freq[dados[linha2][i]]++;
-            }
-        }
-
-        for (auto x : freq) {
-            int valor = x.first;
-            int vezes = x.second;
-            if (vezes == 2) {
-                dados[quantConjunto-1][pos] = valor;
-                pos++;
-            }
-        }   
-    }
-    else {
-        cout << "Você não pode unir dois conjuntos, pois você não tem espaço para mais um conjuto" << endl;
-    }
+    cout << "Intersecção de conjuntos criada." << endl; 
 }
 void mostrarConjunto() {
     int linha;
 
+    if (quantConjunto == 0) {
+        cout << "Nenhum conjunto foi criado ainda." << endl;
+        return;
+    }
+
     cout << "Qual dos conjuntos você deseja ver?" << endl;
     cin >> linha;
     
-    while (linha < 0 && linha >= quantConjunto) {
+    while (linha < 0 || linha >= quantConjunto) {
         cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
         cout << "Qual conjunto você deseja ver?" << endl;
         cin >> linha;
     }
 
+    cout << "Conjunto " << linha << " = ";
+
     for (int i = 0; i < N; i++) {
-        cout << "Conjunto " << linha << " = ";
         if (dados[linha][0] == 0) {
             cout << "Vazio";
             break;
@@ -223,13 +252,20 @@ void mostrarConjunto() {
         cout << endl;
     }
 }
+
 void mostrarTodosConjuntos() {
     int linha = 0;
+
+    if (quantConjunto == 0) {
+        cout << "Nenhum conjunto foi criado ainda." << endl;
+        return;
+    }
+
     cout << "Temos " << quantConjunto << " conjuntos:" << endl;
     
     while (linha < quantConjunto) {
-        for (int i = 0; i < N; i++) {
         cout << "Conjunto " << linha << " = ";
+        for (int i = 0; i < N; i++) {
         if (dados[linha][0] == 0) {
             cout << "Vazio";
             break;
@@ -242,18 +278,24 @@ void mostrarTodosConjuntos() {
         }
         cout << endl;
         }
+        linha++;
     }
 
 }
 void buscarValor() {
-    int valor, pos = 0;;
+    int valor, pos = 0;
+
+    if (quantConjunto == 0) {
+        cout << "Nenhum conjunto foi criado ainda." << endl;
+        return;
+    }
+
     cout << "Qual valor você deseja buscar?" << endl;
     cin >> valor;
 
-    while (valor != 0) {
-        cout << "0 não existe dentro dos valores" << endl;
-        cout << "Qual valor você deseja buscar?" << endl;
-        cin >> valor;
+    if (valor == 0) {
+        cout << "O valor 0 não existe, pois não é permitido." << endl;
+        return;
     }
 
     vector<int> indices(M,-1);
@@ -263,7 +305,6 @@ void buscarValor() {
             if (dados[i][j] == 0) {
                 break;
             }
-            
             if (dados[i][j] == valor) {
                 indices[pos] = i;
                 pos++;
@@ -272,12 +313,13 @@ void buscarValor() {
         }
     }
 
-    cout << "Conjuntos que contêm o valor " << valor << ":" << endl;
-
-    for (int i = 0; i < M; i++) {
-        if (indices[i] == -1) {
-            break;
+    if (pos == 0) {
+        cout << "Nenhum conjunto contém o valor " << valor << "." << endl;
+    }
+    else {
+        cout << "Conjuntos que contêm o valor " << valor << ":" << endl;
+        for (int i = 0; i < pos; i++) {
+            cout << "Conjunto " << indices[i] << endl;
         }
-        cout << "Conjunto " << indices[i] << endl;
     }
 }
