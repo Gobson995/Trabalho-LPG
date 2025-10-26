@@ -1,58 +1,59 @@
 #include <bits/stdc++.h>
-#include "funcao.h"
+#include "funcoes.h"
 
 using namespace std;
 
-
-vector<vector<int>>dados;
-
-int main(){
+int main() {
     int opcao = -1;
-    cout << "qual o tamanho da matriz no formato M x N? " << '\n';
-    cin >> linha  >> coluna;
-    //inicializar o tamanho
-    dados.assign(linha, vector<int>(coluna, 0));
-    while(opcao != 0){
-        cout << "1 - criar um conjunto vazio" << '\n';
-        cout << "2 - inserir dados no conjunto" << '\n';
-        cout << "3 - remover conjunto" << '\n';
-        cout << "4 - fazer união de dois conjuntos" << '\n';
-        cout << "5 - fazer intersecção de dois conjuntos" << '\n';
-        cout << "6 - mostrar um conjunto" << '\n';
-        cout << "7 - mostrar todos os conjuntos" << '\n';
-        cout << "8 - Fazer busca por um valor" << '\n';
-        cout << "0 - sair do sistema" << '\n';
+
+    cout << "=== GERENCIAMENTO DE CONJUNTOS ===" << endl;
+    cout << "Máximo de conjuntos (M): " << M << endl;
+    cout << "Máximo de elementos por conjunto (N): " << N << endl;
+
+    while (opcao != 9) {
+        cout << "\nEsse é o menu de opções para você escolher: " << endl;
+        cout << "1 - Criar um novo conjunto vazio" << endl;
+        cout << "2 - Inserir dados em um conjunto" << endl;
+        cout << "3 - Remover um conjunto" << endl;
+        cout << "4 - Fazer a união entre dois conjuntos" << endl;
+        cout << "5 - Fazer a intersecção entre dois conjuntos" << endl;
+        cout << "6 - Mostrar um conjunto" << endl;
+        cout << "7 - Mostrar todos os conjuntos" << endl;
+        cout << "8 - Fazer busca por um valor" << endl;
+        cout << "9 - Sair do programa" << endl;
+        cout << "Escolha uma opção: ";
         cin >> opcao;
-        switch(opcao){
+
+        switch (opcao) {
             case 1:
                 criarConjunto();
-            break;
+                break;
             case 2:
                 inserirValor();
-            break;
+                break;
             case 3:
                 removerConjunto();
-            break;
+                break;
             case 4:
                 unir2Conjuntos();
-            break;
+                break;
             case 5:
                 interseccao2Conjuntos();
-            break;
+                break;
             case 6:
                 mostrarConjunto();
-            break;
+                break;
             case 7:
                 mostrarTodosConjuntos();
-            break;
+                break;
             case 8:
                 buscarValor();
-            break;
-            case 0:
-                cout << "Encerrando...\n";
-            break;
-            default : 
-            cout << "infome um valor valido \n";
+                break;
+            case 9:
+                cout << "\nEncerrando o programa..." << endl;
+                break;
+            default:
+                cout << "\nOpção inválida. Tente novamente." << endl;
         }
     }
 }

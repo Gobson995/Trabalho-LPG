@@ -1,13 +1,15 @@
 #include <bits/stdc++.h>
-#include "funcao.h"
+#include "funcoes.h"
 
 using namespace std;
 
+vector<vector<int>> dados(M, vector<int> (N,0));
 int quantConjunto = 0;
 
 void criarConjunto() {
-    if (quantConjunto <= M) {
+    if (quantConjunto < M) {
         quantConjunto++;
+        cout << "O conjunto " << quantConjunto -1 << " foi criado." << endl;
     }
     else {
         cout << "Você não pode criar mais conjuntos, pois você já criou todos possíveis" << endl;
@@ -17,41 +19,65 @@ void criarConjunto() {
 void inserirValor(){
     int linha, valor;
 
-    cout << "Em qual linha você deseja inserir os dados?" << endl;
+    cout << "Em qual conjunto você deseja inserir os dados?" << endl;
     cin >> linha;
     
-    while (linha < 0 && linha >= quantConjunto) {
-        cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
-        cout << "Em qual linha você deseja inserir os dados?" << endl;
+    while (linha < 0 || linha >= quantConjunto) {
+        cout << "Você digitou um valor inválido, pois essa linha (ainda) não existe" << endl;
+        cout << "Em qual conjunto você deseja inserir os dados?" << endl;
         cin >> linha;
     }
+
+    int pos = 0;
+    while (pos < N && dados[linha][pos] != 0) {
+        pos++;
+    }
+
+    if (pos == N) {
+        cout << "O conjunto está cheio." << endl;
+        return;
+    }
+
+    cout << "Digite os valores (0 encerra): " << endl;
     
-    for (int i = 0; i <= N; i++) {
-      if (i == N) {
-        cout << "Você chegou no limite do conjunto" << endl;
-        break;
-      }
+    while (pos < N) {
+        cin >> valor;
 
-      cin >> valor;
+        if (valor == 0) {
+            break;
+        }
 
-      if (valor == 0) {
-        break;
-      }
-      else {
-        dados[linha][i] = valor;
-      }
+        bool repetido = false;
+        for (int j = 0; j < pos; j++) {
+            if (dados[linha][j] == valor) {
+                repetido = true;
+                break;
+            }
+        }
+
+        if (repetido) {
+            cout << "Valor repetido. Digite outro: ";
+            continue;
+        }
+
+        dados[linha][pos] = valor;
+        pos++;
+
+        if (pos == N) {
+            cout << "Você atingiu o limite do conjunto." << endl;
+            break;
+        }
     }
 }
 
 void removerConjunto() {
     int linha;
-
-    cout << "Em qual linha você deseja remover os dados?" << endl;
+    cout << "Em qual conjunto você deseja remover?" << endl;
     cin >> linha;
     
-    while (linha < 0 && linha >= quantConjunto) {
+    while (linha < 0 || linha >= quantConjunto) {
         cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
-        cout << "Em qual linha você deseja remover os dados?" << endl;
+        cout << "Qual conjunto você deseja remover?" << endl;
         cin >> linha;
     }
 
@@ -68,6 +94,7 @@ void removerConjunto() {
     }
 
     quantConjunto--;
+    cout << "Conjunto removido com sucesso." << endl;
 }
 
 void unir2Conjuntos() {
@@ -170,6 +197,8 @@ void interseccao2Conjuntos(){
     }
 }
 void mostrarConjunto() {
+    int linha;
+
     cout << "Qual dos conjuntos você deseja ver?" << endl;
     cin >> linha;
     
