@@ -3,15 +3,8 @@
 
 using namespace std;
 
-
-vector<vector<int>>dados;
-
 int main(){
     int opcao = -1;
-    cout << "qual o tamanho da matriz no formato M x N? " << '\n';
-    cin >> linha  >> coluna;
-    //inicializar o tamanho
-    dados.assign(linha, vector<int>(coluna, 0));
     while(opcao != 0){
         cout << "1 - criar um conjunto vazio" << '\n';
         cout << "2 - inserir dados no conjunto" << '\n';
@@ -47,6 +40,9 @@ int main(){
             break;
             case 8:
                 buscarValor();
+            break;
+            case 9:
+                mostrarTUDO();
             break;
             case 0:
                 cout << "Encerrando...\n";

@@ -1,10 +1,5 @@
-#pragma once
-
-inline constexpr int M = 8;
-inline constexpr int N = 10;
-
-extern vector<vector<int>> dados(M, vector<int> (N,0)); 
-extern int coluna,linha, quantConjuntos;
+const int M = 8;
+const int N = 10;
 
 void criarConjunto();
 void inserirValor();
@@ -14,4 +9,4 @@ void interseccao2Conjuntos();
 void mostrarConjunto();
 void mostrarTodosConjuntos();
 void buscarValor();
-
+void mostrarTUDO();
