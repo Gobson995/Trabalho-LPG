@@ -1,7 +1,7 @@
 #ifndef FUNCOES_H
 #define FUNCOES_H
 
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
