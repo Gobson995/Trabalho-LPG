@@ -10,7 +10,7 @@ int main() {
     cout << "Máximo de conjuntos (M): " << M << endl;
     cout << "Máximo de elementos por conjunto (N): " << N << endl;
 
-    while (opcao != 9) {
+    while (opcao != 0) {
         cout << "\nEsse é o menu de opções para você escolher: " << endl;
         cout << "1 - Criar um novo conjunto vazio" << endl;
         cout << "2 - Inserir dados em um conjunto" << endl;
@@ -20,7 +20,7 @@ int main() {
         cout << "6 - Mostrar um conjunto" << endl;
         cout << "7 - Mostrar todos os conjuntos" << endl;
         cout << "8 - Fazer busca por um valor" << endl;
-        cout << "9 - Sair do programa" << endl;
+        cout << "0 - Sair do programa" << endl;
         cout << "Escolha uma opção: ";
         cin >> opcao;
 
@@ -49,8 +49,8 @@ int main() {
             case 8:
                 buscarValor();
                 break;
-            case 9:
-                cout << "\nEncerrando o programa..." << endl;
+            case 0:
+                cout << "\nEncerrando..." << endl;
                 break;
             default:
                 cout << "\nOpção inválida. Tente novamente." << endl;
