@@ -5,41 +5,48 @@ using namespace std;
 
 vector<vector<int>> dados(M, vector<int> (N,0));
 int quantConjunto = 0;
-int validarLinha(){
+
+int validarLinha() {
     int linha = -1;
+    
     while (linha < 0 || linha >= quantConjunto) {
         cin >> linha;
-        if(linha < 0 || linha >= quantConjunto)
-            cout << "Você digitou um valor inválido, pois essa linha não existe" << endl;
+        if(linha < 0 || linha >= quantConjunto) {
+            cout << "Você digitou um valor inválido, pois essa linha não existe." << endl;
+        }
     }
     return linha;
 }
-bool conjuntoCriado(){
-    if(quantConjunto == 0){
+
+bool conjuntoCriado() {
+    if(quantConjunto == 0) {
         cout << "Nenhum conjunto foi criado ainda." << endl;
         return false;
-    }else{
+    }
+    else {
         return true;
     }
-
 }
+
 void criarConjunto() {
     if (quantConjunto < M) {
         quantConjunto++;
         cout << "O conjunto " << quantConjunto - 1 << " foi criado." << endl;
     }
     else {
-        cout << "Você não pode criar mais conjuntos, pois você já criou todos possíveis" << endl;
+        cout << "Você não pode criar mais conjuntos, pois você já criou todos possíveis." << endl;
     }
 }
 
 void inserirValor() {
-    int linha, valor;
-    if (!conjuntoCriado())return;
+    int linha, valor, pos = 0;
+
+    if (!conjuntoCriado()) return;
 
     cout << "Em qual conjunto você deseja inserir os dados?" << endl;
+
     linha = validarLinha();
-    int pos = 0;
+
     while (pos < N && dados[linha][pos] != 0) {
         pos++;
     }
@@ -59,6 +66,7 @@ void inserirValor() {
         }
 
         bool repetido = false;
+
         for (int j = 0; j < pos; j++) {
             if (dados[linha][j] == valor) {
                 repetido = true;
@@ -87,6 +95,7 @@ void removerConjunto() {
     if (!conjuntoCriado())return;
     
     cout << "Em qual conjunto você deseja remover?" << endl;
+
     linha = validarLinha();
 
     for (int i = linha; i < (quantConjunto - 1); i++) {
@@ -99,6 +108,7 @@ void removerConjunto() {
     }
 
     quantConjunto--;
+
     cout << "Conjunto removido." << endl;
 }
 
@@ -107,7 +117,7 @@ void unir2Conjuntos() {
     map<int,int> freq;
 
     if (quantConjunto >= M) {
-        cout << "Não há espaço para um novo conjunto" << endl;
+        cout << "Não há espaço para um novo conjunto." << endl;
         return;
     }
 
@@ -118,10 +128,13 @@ void unir2Conjuntos() {
 
     cout << "Quais dois conjunto você deseja unir?" << endl;
     cout << "Primeiro conjunto: ";
+
     linha1 = validarLinha();
 
     cout << endl << "Segundo conjunto: ";
+    
     linha2 = validarLinha();
+
     cout << endl;
 
     for (int i = 0; i < N; i++) {
@@ -152,7 +165,7 @@ void interseccao2Conjuntos(){
     map<int,int> freq;
 
     if (quantConjunto >= M) {
-        cout << "Não há espaço para um novo conjunto" << endl;
+        cout << "Não há espaço para um novo conjunto." << endl;
         return;
     }
 
@@ -163,10 +176,13 @@ void interseccao2Conjuntos(){
 
     cout << "Quais dois conjunto você deseja fazer a intersecção?" << endl;
     cout << "Primeiro conjunto: ";
+
     linha1 = validarLinha();
 
     cout << endl << "Segundo conjunto: ";
+
     linha2 = validarLinha();
+
     cout << endl;
 
     for (int i = 0; i < N; i++) {
@@ -194,9 +210,10 @@ void interseccao2Conjuntos(){
 void mostrarConjunto() {
     int linha;
 
-    if (!conjuntoCriado())return;
+    if (!conjuntoCriado()) return;
 
     cout << "Qual dos conjuntos você deseja ver?" << endl;
+
     linha = validarLinha();
 
     cout << "Conjunto " << linha << " = ";
@@ -220,7 +237,7 @@ void mostrarConjunto() {
 void mostrarTodosConjuntos() {
     int linha = 0;
 
-    if (!conjuntoCriado())return;
+    if (!conjuntoCriado()) return;
 
     cout << "Temos " << quantConjunto << " conjuntos:" << endl;
     

@@ -6,11 +6,15 @@ using namespace std;
 int main() {
     int opcao = -1;
 
+    
+
     cout << "=== GERENCIAMENTO DE CONJUNTOS ===" << endl;
     cout << "Máximo de conjuntos (M): " << M << endl;
     cout << "Máximo de elementos por conjunto (N): " << N << endl;
 
     while (opcao != 0) {
+        if(opcao != -1) this_thread::sleep_for(chrono::seconds(2)); // um timer para conseguir visualizar melhor!!
+
         cout << "\nEsse é o menu de opções para você escolher: " << endl;
         cout << "1 - Criar um novo conjunto vazio" << endl;
         cout << "2 - Inserir dados em um conjunto" << endl;
